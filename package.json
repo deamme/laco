@@ -1,8 +1,9 @@
 {
   "name": "laco",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Simple and powerful state management for React and Inferno",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "repository": "https://github.com/deamme/laco.git",
   "author": "Deam <deamkh@gmail.com>",
   "license": "MIT",
