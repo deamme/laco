@@ -28,9 +28,11 @@ const decrement = () => CounterStore.setState({ count: getState().count - 1 })
 const Counter = () => (
   <Subscribe to={[CounterStore]}>
     {(state) => (
-      <button onClick={decrement}>-</button>
-      <span>{state.count}</span>
-      <button onClick={increment}>+</button>
+      <div>
+        <button onClick={decrement}>-</button>
+        <span>{state.count}</span>
+        <button onClick={increment}>+</button>
+      </div>
     )}
   </Subscribe>
 )
@@ -72,4 +74,6 @@ Store.setState((state) => { /* return modified state */}, "increment")
 ```
 
 ## Credits
-Heavily inspired by [Unstated](https://github.com/jamiebuilds/unstated)
+Heavily inspired by:
+- [Unstated](https://github.com/jamiebuilds/unstated)
+- [Redux](https://github.com/reactjs/redux)
