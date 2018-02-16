@@ -1,10 +1,14 @@
 export let Component
 
-try {
-  Component = require("inferno").Component
-} catch (error) { /* Fail silent */ }
+// let jsanParse
+let devTools
+let persistedStore
+
 try {
   Component = require("react").Component
+} catch (error) { /* Fail silent */ }
+try {
+  Component = require("inferno").Component
 } catch (error) { /* Fail silent */ }
 
 if (!Component) {
@@ -13,16 +17,19 @@ if (!Component) {
 
 if (process.env.NODE_ENV !== 'production') {
   console.error(`You're currently using a development version of Laco`)
+  // jsanParse = require('jsan').parse
+  if ((window as any).__REDUX_DEVTOOLS_EXTENSION__) {
+    devTools = (window as any).__REDUX_DEVTOOLS_EXTENSION__.connect()
+    // const persistedStore = jsanParse(localStorage.getItem('__LACO__'))
+    persistedStore = JSON.parse(localStorage.getItem('__LACO__'))
+    if (persistedStore) {
+      devTools.init(persistedStore)
+    }
+  }
 }
 
 let STORE = {}
 let COUNTER = 0
-
-if (process.env.NODE_ENV !== 'production') {
-  if ((window as any).__REDUX_DEVTOOLS_EXTENSION__) {
-    (window as any).__LACO_TOOLS__ = (window as any).__REDUX_DEVTOOLS_EXTENSION__.connect()
-  }
-}
 
 export class Store {
   idx
@@ -34,11 +41,28 @@ export class Store {
     if (name) this.name = name
     this.idx = COUNTER++
     STORE[this.idx] = initialState
+
+    if (process.env.NODE_ENV !== 'production') {
+      if (devTools) {
+        if (persistedStore) {
+          STORE[this.idx] = persistedStore[this.idx]
+        }
+        
+        devTools.subscribe((message) => {
+          switch (message.payload && message.payload.type) {
+            case 'JUMP_TO_STATE':
+            case 'JUMP_TO_ACTION':
+              this.setState(JSON.parse(message.state)[this.idx])
+              // this.setState(jsanParse(message.state)[this.idx])
+          }
+        })
+      }
+    }
   }
   
-  getGlobalStore() {
-    return STORE
-  }
+  // getGlobalStore() {
+  //   return STORE
+  // }
 
   getState() {
     return STORE[this.idx]
@@ -50,11 +74,9 @@ export class Store {
       : { ...STORE[this.idx], ...state }
 
     if (process.env.NODE_ENV !== 'production') {
-      if ((window as any).__LACO_TOOLS__) {
-        (window as any).__LACO_TOOLS__.send(
-          this.name ? this.name + ' - ' + info : info,
-          STORE
-        )
+      localStorage.setItem('__LACO__', JSON.stringify(STORE))
+      if (devTools) {
+        devTools.send(this.name ? this.name + ' - ' + info : info, STORE)
       }
     }
 
@@ -67,6 +89,15 @@ export class Store {
 
   unsubscribe(fn) {
     this._listeners = this._listeners.filter(f => f !== fn)
+  }
+
+  dispatch(value: any, info: string) {
+    if (process.env.NODE_ENV !== 'production') {
+      if (devTools) {
+        devTools.send(this.name ? this.name + ' - ' + info : info, STORE)
+      }
+    }
+    return value
   }
 }
 
@@ -106,4 +137,13 @@ export class Subscribe extends Component<any, any> {
     this.stores = stores
     return (this.props as any).children(...states)
   }
+}
+
+export function dispatch(value: any, info: string) {
+  if (process.env.NODE_ENV !== 'production') {
+    if (devTools) {
+      devTools.send(info, STORE)
+    }
+  }
+  return value
 }
