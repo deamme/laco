@@ -5,11 +5,15 @@ let devTools
 let persistedStore
 
 try {
-  Component = require("react").Component
-} catch (error) { /* Fail silent */ }
+  Component = require('react').Component
+} catch (error) {
+  /* Fail silent */
+}
 try {
-  Component = require("inferno").Component
-} catch (error) { /* Fail silent */ }
+  Component = require('inferno').Component
+} catch (error) {
+  /* Fail silent */
+}
 
 if (!Component) {
   throw 'Please require Inferno or React'
@@ -21,8 +25,9 @@ if (process.env.NODE_ENV !== 'production') {
   if ((window as any).__REDUX_DEVTOOLS_EXTENSION__) {
     devTools = (window as any).__REDUX_DEVTOOLS_EXTENSION__.connect()
     // const persistedStore = jsanParse(localStorage.getItem('__LACO__'))
-    persistedStore = JSON.parse(localStorage.getItem('__LACO__'))
-    if (persistedStore) {
+    const content = localStorage.getItem('__LACO__')
+    if (content) {
+      persistedStore = JSON.parse(content)
       devTools.init(persistedStore)
     }
   }
@@ -47,19 +52,23 @@ export class Store {
         if (persistedStore) {
           STORE[this.idx] = persistedStore[this.idx]
         }
-        
-        devTools.subscribe((message) => {
+
+        devTools.subscribe(message => {
           switch (message.payload && message.payload.type) {
             case 'JUMP_TO_STATE':
             case 'JUMP_TO_ACTION':
-              this.setState(JSON.parse(message.state)[this.idx])
-              // this.setState(jsanParse(message.state)[this.idx])
+              STORE[this.idx] = JSON.parse(message.state)[this.idx]
+              this._listeners.forEach(fn => fn())
+              break
+            case 'PAUSE_RECORDING':
+              localStorage.setItem('__LACO__', '')
+              location.reload()
           }
         })
       }
     }
   }
-  
+
   // getGlobalStore() {
   //   return STORE
   // }
@@ -69,9 +78,10 @@ export class Store {
   }
 
   setState(state: Object | Function, info?: String) {
-    STORE[this.idx] = typeof state === 'function'
-      ? state(STORE[this.idx])
-      : { ...STORE[this.idx], ...state }
+    STORE[this.idx] =
+      typeof state === 'function'
+        ? state(STORE[this.idx])
+        : { ...STORE[this.idx], ...state }
 
     if (process.env.NODE_ENV !== 'production') {
       localStorage.setItem('__LACO__', JSON.stringify(STORE))
@@ -128,7 +138,7 @@ export class Subscribe extends Component<any, any> {
     const states = this.props.to.map(store => {
       store.unsubscribe(this.onUpdate)
       store.subscribe(this.onUpdate)
-      
+
       stores.push(store)
 
       return store.getState()
