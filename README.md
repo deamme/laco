@@ -8,7 +8,7 @@ Set up your stores and subscribe to them. Easy as that!
 ## Summary
 - :rocket: Simple to use
 - :tada: Lightweight (under 1kb in size)
-- :sparkles: [Redux DevTools Extension support](https://github.com/zalmoxisus/redux-devtools-extension) (time travel, persist state etc.)
+- :sparkles: Partial [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension) support (time travel, persist state)
 
 ## Example
 ```javascript
@@ -48,6 +48,17 @@ Following commands are available for each example project:
 
 `npm run start:prod`
 
+## Redux DevTools Extension
+Checkout [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension).
+### Time travel
+Just click on the stopwatch icon and you will get a slider which you can play with.
+That's it! :)
+
+### State persisting
+Persist of state is **ON** by default when in **development mode** so a full page refresh does not destroy your state. This makes hot-reloading like [react-hot-loader](https://github.com/gaearon/react-hot-loader) absolute because you already have a persisting state. The only caveat is that a full page refresh may seem slower by a tiny bit.
+
+You may want to **RESET** the persisted state, you can do that by using the PAUSE button on the DevTools Extension. This a bit of a hack because the persist state button on the extension does not have an API for it.
+
 ## API
 ### `Store`
 #### Arguments
@@ -57,7 +68,7 @@ Following commands are available for each example project:
 // Initializing with an initial state and a name:
 const NewStore = Store({ count: 0 }, "Counter")
 ```
-The name is optional and is used to get an overview of action and store relationship in Redux DevTools Extension. Action names for the Store will now show up as `Counter - ${actionType}` in DevTools Extension where as before only `${actionType}`.
+The name is optional and is used to get an overview of action and store relationship in Redux DevTools Extension. Action names for the Store will now show up as `Counter - ${actionType}` in DevTools Extension where as before only `${actionType}` was shown.
 
 ### `Store.setState()`
 #### Arguments
@@ -72,6 +83,46 @@ Immutability is taking care of to a certain extent behind the scenes with the sp
 // Setting a new state and passing an optional action name "increment"
 Store.setState((state) => { /* return modified state */}, "increment")
 ```
+
+### `Store.dispatch()`
+#### Arguments
+1. [Required] - Some side effect
+2. [Required] - String
+```javascript
+// Dispatching an action that does not change the state of the store
+Store.dispatch(changeLocation(), "Location change")
+```
+You may want to dispatch an action that is associated with a certain store but don't want to change the state. The action will in this case be shown as `StoreName - Location change`.
+
+### `dispatch()`
+#### Arguments
+1. [Required] - Some side effect
+2. [Required] - String
+```javascript
+import { dispatch } from 'laco'
+
+// Dispatching a global action that does not change any state
+dispatch(changeLocation(), "Location change")
+```
+You may want to dispatch a global action that is **NOT** associated with any store. The action will in this case just be shown as `Location change`.
+
+### `<Subscribe />`
+#### Props
+- `to` - Array of stores you want to subscribe to
+```javascript
+<Subscribe to={[CounterStore]}>
+  {({ count }) => (
+    <div>
+      <button onClick={decrement}>-</button>
+      <span>{count}</span>
+      <button onClick={increment}>+</button>
+    </div>
+  )}
+</Subscribe>
+```
+The `Subscribe` component is making use of the new render prop idea. Related articles:
+- [Apollo Query Component](https://dev-blog.apollodata.com/whats-next-for-react-apollo-4d41ba12c2cb)
+- [Use a render prop!](https://cdb.reacttraining.com/use-a-render-prop-50de598f11ce)
 
 ## Credits
 Heavily inspired by:
