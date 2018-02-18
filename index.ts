@@ -73,11 +73,11 @@ export class Store {
   //   return STORE
   // }
 
-  getState() {
+  get() {
     return STORE[this.idx]
   }
 
-  setState(state: Object | Function, info?: String) {
+  set(state: Object | Function, info?: String) {
     STORE[this.idx] =
       typeof state === 'function'
         ? state(STORE[this.idx])
@@ -141,7 +141,7 @@ export class Subscribe extends Component<any, any> {
 
       stores.push(store)
 
-      return store.getState()
+      return store.get()
     })
 
     this.stores = stores
