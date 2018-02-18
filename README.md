@@ -18,12 +18,9 @@ import { Store, Subscribe } from 'laco'
 // Creating a new store with an initial state { count: 0 }
 const CounterStore = new Store({ count: 0 })
 
-// Utility function to get the state of the store
-const getState = () => CounterStore.getState()
-
 // Implementing some actions to update the store
-const increment = () => CounterStore.setState({ count: getState().count + 1 })
-const decrement = () => CounterStore.setState({ count: getState().count - 1 })
+const increment = () => CounterStore.set({ count: CounterStore.get().count + 1 })
+const decrement = () => CounterStore.set({ count: CounterStore.get().count - 1 })
 
 const Counter = () => (
   <Subscribe to={[CounterStore]}>
@@ -65,23 +62,30 @@ You may want to **RESET** the persisted state, you can do that by using the PAUS
 1. [Required] - Object
 2. [Optional] - String
 ```javascript
-// Initializing with an initial state and a name:
+// Initializing a new store with an initial state and a name:
 const NewStore = Store({ count: 0 }, "Counter")
 ```
 The name is optional and is used to get an overview of action and store relationship in Redux DevTools Extension. Action names for the Store will now show up as `Counter - ${actionType}` in DevTools Extension where as before only `${actionType}` was shown.
 
-### `Store.setState()`
+### `Store.get()`
+```javascript
+// Getting the state of the store
+Store.get()
+```
+Returns an object which could be something like `{ count: 0 }` following the example.
+
+### `Store.set()`
 #### Arguments
 1. [Required] - Function or Object
 2. [Optional] - String
 ```javascript
 // Setting a new state and passing an optional action name "increment"
-Store.setState({ count: getState().count + 1 }, "increment")
+Store.set({ count: CounterStore.get().count + 1 }, "increment")
 ```
 Immutability is taking care of to a certain extent behind the scenes with the spread operator but you may want more control over the state. You can do this by passing a function like so:
 ```javascript
 // Setting a new state and passing an optional action name "increment"
-Store.setState((state) => { /* return modified state */}, "increment")
+Store.set((state) => { /* return modified state */}, "increment")
 ```
 
 ### `Store.dispatch()`
