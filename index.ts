@@ -19,7 +19,7 @@ if (!Component) {
   throw 'Please require Inferno or React'
 }
 
-if (process.env.NODE_ENV !== 'production') {
+if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
   console.error(`You're currently using a development version of Laco`)
   // jsanParse = require('jsan').parse
   if ((window as any).__REDUX_DEVTOOLS_EXTENSION__) {
@@ -47,7 +47,7 @@ export class Store {
     this.idx = COUNTER++
     STORE[this.idx] = initialState
 
-    if (process.env.NODE_ENV !== 'production') {
+    if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
       if (devTools) {
         if (persistedStore) {
           STORE[this.idx] = persistedStore[this.idx]
@@ -83,7 +83,7 @@ export class Store {
         ? state(STORE[this.idx])
         : { ...STORE[this.idx], ...state }
 
-    if (process.env.NODE_ENV !== 'production') {
+    if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
       localStorage.setItem('__LACO__', JSON.stringify(STORE))
       if (devTools) {
         devTools.send(this.name ? this.name + ' - ' + info : info, STORE)
@@ -102,7 +102,7 @@ export class Store {
   }
 
   dispatch(value: any, info: string) {
-    if (process.env.NODE_ENV !== 'production') {
+    if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
       if (devTools) {
         devTools.send(this.name ? this.name + ' - ' + info : info, STORE)
       }
@@ -150,7 +150,7 @@ export class Subscribe extends Component<any, any> {
 }
 
 export function dispatch(value: any, info: string) {
-  if (process.env.NODE_ENV !== 'production') {
+  if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
     if (devTools) {
       devTools.send(info, STORE)
     }
