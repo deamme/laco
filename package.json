@@ -1,6 +1,6 @@
 {
   "name": "laco",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Simple and powerful state management for React and Inferno",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
