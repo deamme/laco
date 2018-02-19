@@ -8,7 +8,7 @@ Set up your stores and subscribe to them. Easy as that!
 ## Summary
 - :rocket: Simple to use
 - :tada: Lightweight (under 1kb in size)
-- :sparkles: Partial [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension) support (time travel, persist state)
+- :sparkles: Partial [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension) support (time travel and persist state)
 
 ## Example
 ```javascript
@@ -88,6 +88,13 @@ Immutability is taking care of to a certain extent behind the scenes with the sp
 Store.set((state) => { /* return modified state */}, "increment")
 ```
 
+### `Store.reset()`
+```javascript
+// Resets the store to initial state
+Store.reset()
+```
+A good practice when testing is to call `reset()` on a store before using the store in a test. This takes care of some edge cases that you may run into. The reason for this is that Laco is using a global object behind the scenes to store all of your stores states into one big object. Redux also operates on one global object which makes time travel possible.
+
 ### `Store.dispatch()`
 #### Arguments
 1. [Required] - Some side effect
@@ -127,6 +134,26 @@ You may want to dispatch a global action that is **NOT** associated with any sto
 The `Subscribe` component is making use of the new render prop idea. Related articles:
 - [Apollo Query Component](https://dev-blog.apollodata.com/whats-next-for-react-apollo-4d41ba12c2cb)
 - [Use a render prop!](https://cdb.reacttraining.com/use-a-render-prop-50de598f11ce)
+
+## Testing
+Testing using [tape](https://github.com/substack/tape):
+```javascript
+import * as test from 'tape'
+import { CounterStore, increment, decrement } from './index'
+
+test('counter', (t) => {
+  CounterStore.reset()
+  t.assert(CounterStore.get().count === 0);
+
+  increment()
+  t.assert(CounterStore.get().count === 1);
+
+  decrement()
+  t.assert(CounterStore.get().count === 0);
+
+  t.end()
+})
+```
 
 ## Credits
 Heavily inspired by:
