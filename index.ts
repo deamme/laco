@@ -41,11 +41,13 @@ export class Store {
   name = ''
   _listeners = []
   devTools
+  initialState
 
   constructor(initialState: Object, name?: string) {
     if (name) this.name = name
     this.idx = COUNTER++
     STORE[this.idx] = initialState
+    this.initialState = initialState
 
     if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
       if (devTools) {
@@ -69,10 +71,6 @@ export class Store {
     }
   }
 
-  // getGlobalStore() {
-  //   return STORE
-  // }
-
   get() {
     return STORE[this.idx]
   }
@@ -91,6 +89,10 @@ export class Store {
     }
 
     this._listeners.forEach(fn => fn())
+  }
+
+  reset() {
+    STORE[this.idx] = this.initialState
   }
 
   subscribe(fn) {
