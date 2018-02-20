@@ -152,7 +152,7 @@ The `Subscribe` component is making use of the new render prop idea. Related art
 Testing using [tape](https://github.com/substack/tape):
 ```javascript
 import * as test from 'tape'
-import { CounterStore, increment, decrement } from './index'
+import { CounterStore, increment, decrement } from './CounterStore'
 
 test('counter', (t) => {
   CounterStore.reset()
