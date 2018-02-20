@@ -5,6 +5,10 @@ Very simple and powerful state management solution for React and Inferno.
 
 Set up your stores and subscribe to them. Easy as that!
 
+`npm install laco`
+
+`npm install laco-inferno` or `npm install laco-react`
+
 ## Summary
 - :rocket: Simple to use
 - :tada: Lightweight (under 1kb in size)
@@ -13,7 +17,8 @@ Set up your stores and subscribe to them. Easy as that!
 ## Example
 ```javascript
 import { render } from 'inferno' // or 'react-dom'
-import { Store, Subscribe } from 'laco'
+import { Store } from 'laco'
+import { Subscribe } from 'laco-inferno' // or 'laco-react'
 
 // Creating a new store with an initial state { count: 0 }
 const CounterStore = new Store({ count: 0 })
@@ -51,10 +56,18 @@ Checkout [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools
 Just click on the stopwatch icon and you will get a slider which you can play with.
 That's it! :)
 
-### State persisting
-Persist of state is **ON** by default when in **development mode** so a full page refresh does not destroy your state. This makes hot-reloading like [react-hot-loader](https://github.com/gaearon/react-hot-loader) absolute because you already have a persisting state. The only caveat is that a full page refresh may seem slower by a tiny bit.
+### State persistence
+Persistence of state is **ON** by default when in **development mode** so a full page refresh does not destroy your state. This makes hot-reloading like [react-hot-loader](https://github.com/gaearon/react-hot-loader) absolute because you already have a persisting state. The only caveat is that a full page refresh may seem slower by a tiny bit.
 
 You may want to **RESET** the persisted state, you can do that by using the PAUSE button on the DevTools Extension. This a bit of a hack because the persist state button on the extension does not have an API for it.
+
+## React Native Debugger
+Checkout [React Native Debugger](https://github.com/jhen0409/react-native-debugger).
+### Time travel
+Works as you would expect :)!
+
+### State persistence
+Persistence of state is not supported for React Native Debugger but turning hot-reloading **ON** gives the same benefit!
 
 ## API
 ### `Store`
