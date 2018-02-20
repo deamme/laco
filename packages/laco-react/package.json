@@ -1,0 +1,22 @@
+{
+  "name": "laco-react",
+  "version": "0.0.6",
+  "description": "React <Subscribe /> component for Laco state management",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "repository": "https://github.com/deamme/laco.git",
+  "author": "Deam Hansen",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "rimraf dist && tsc"
+  },
+  "dependencies": {
+    "react": "^16.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.0.38",
+    "rimraf": "^2.6.2",
+    "typescript": "^2.7.1"
+  }
+}
