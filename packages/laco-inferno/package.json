@@ -12,7 +12,8 @@
     "prepublishOnly": "rimraf dist && tsc"
   },
   "dependencies": {
-    "inferno": "^4.0.4"
+    "inferno": "^4.0.4",
+    "inferno-shared": "^4.0.4"
   },
   "devDependencies": {
     "rimraf": "^2.6.2",
