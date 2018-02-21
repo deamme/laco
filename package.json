@@ -5,6 +5,10 @@
   "repository": "https://github.com/deamme/laco.git",
   "author": "Deam Hansen",
   "license": "MIT",
+  "scripts": {
+    "build": "lerna bootstrap",
+    "publish": "lerna bootstrap"
+  },
   "devDependencies": {
     "lerna": "^2.9.0"
   }
