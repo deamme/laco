@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "history": "^4.7.2",
-    "laco": "^0.0.6"
+    "laco": "^0.0.6",
+    "path-to-regexp": "^2.1.0"
   },
   "devDependencies": {
     "rimraf": "^2.6.2",
