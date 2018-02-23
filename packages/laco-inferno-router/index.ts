@@ -23,11 +23,14 @@ history.listen(location => {
   )
 })
 
-export const push = (path: string) => RouterStore.dispatch(history.push(path), 'PUSH')
-export const replace = (path: string) => RouterStore.dispatch(history.replace(path), 'REPLACE')
+export const push = (path: string) =>
+  RouterStore.dispatch(history.push(path), 'PUSH')
+export const replace = (path: string) =>
+  RouterStore.dispatch(history.replace(path), 'REPLACE')
 export const go = (n: number) => RouterStore.dispatch(history.go(n), 'GO')
 export const goBack = () => RouterStore.dispatch(history.goBack(), 'GO_BACK')
-export const goForward = () => RouterStore.dispatch(history.goForward(), 'GO_FORWARD')
+export const goForward = () =>
+  RouterStore.dispatch(history.goForward(), 'GO_FORWARD')
 
 import { Component } from 'inferno'
 import * as pathToRegexp from 'path-to-regexp'
@@ -90,12 +93,41 @@ export class Route extends Component<any, any> {
     const match = this.computeMatch(this.props)
     const props = { match, location }
 
-    if (component) return match ? component : null;
+    console.log(component)
 
-    if (render) return match ? render(props) : null;
+    if (component) return match ? component : null
 
-    if (typeof children === "function") return children(props);
+    if (render) return match ? render(props) : null
+
+    if (typeof children === 'function') return children(props)
 
     return null
+  }
+}
+
+export class Switch extends Component<any, any> {
+  render() {
+    const { children, location } = this.props
+    let match, child
+
+    children.forEach(element => {
+      if (!match) {
+        const { path: pathProp, exact, strict, sensitive, from } = element.props
+        const path = pathProp || from
+  
+        child = element
+        match = matchPath(location, {
+          path,
+          exact,
+          strict,
+          sensitive,
+        })
+  
+        child.props.location = location
+        child.props.computedMatch= match
+      }
+    })
+
+    return match ? child : null
   }
 }
