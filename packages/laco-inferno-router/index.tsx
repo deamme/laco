@@ -93,8 +93,6 @@ export class Route extends Component<any, any> {
     const match = this.computeMatch(this.props)
     const props = { match, location }
 
-    console.log(component)
-
     if (component) return match ? component : null
 
     if (render) return match ? render(props) : null
@@ -129,5 +127,37 @@ export class Switch extends Component<any, any> {
     })
 
     return match ? child : null
+  }
+}
+
+import { createLocation } from "history";
+
+const isModifiedEvent = event =>
+  !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
+
+export class Link extends Component<any, any> {
+  handleClick = event => {
+    if (this.props.onClick) this.props.onClick(event);
+
+    if (
+      !event.defaultPrevented && // onClick prevented default
+      event.button === 0 && // ignore everything but left clicks
+      !this.props.target && // let browser handle "target=_blank" etc.
+      !isModifiedEvent(event) // ignore clicks with modifier keys
+    ) {
+      event.preventDefault();
+
+      const { replace, to } = this.props;
+
+      if (replace) {
+        replace(to);
+      } else {
+        push(to);
+      }
+    }
+  };
+
+  render() {
+    return <a onClick={this.handleClick}>{this.props.children}</a>
   }
 }
