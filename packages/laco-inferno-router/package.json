@@ -1,23 +1,26 @@
 {
   "name": "laco-inferno-router",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Inferno Laco Router management",
-  "main": "dist/index.js",
+  "main": "dist/index.jsx",
   "typings": "dist/index.d.ts",
   "repository": "https://github.com/deamme/laco.git",
   "author": "Deam Hansen",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
-    "prepublishOnly": "rimraf dist && tsc"
+    "build": "tsc && ts-node compile",
+    "prepublishOnly": "rimraf dist && yarn build"
   },
   "dependencies": {
     "history": "^4.7.2",
+    "inferno": "^4.0.4",
+    "inferno-shared": "^4.0.4",
     "laco": "^0.0.6",
     "path-to-regexp": "^2.1.0"
   },
   "devDependencies": {
     "rimraf": "^2.6.2",
-    "typescript": "^2.7.1"
+    "ts-node": "^5.0.0",
+    "ts-transform-inferno": "1.8.1"
   }
 }

@@ -130,8 +130,6 @@ export class Switch extends Component<any, any> {
   }
 }
 
-import { createLocation } from "history";
-
 const isModifiedEvent = event =>
   !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
 
