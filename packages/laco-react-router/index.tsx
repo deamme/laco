@@ -90,7 +90,8 @@ export class Route extends Component<any, any> {
   }
 
   render() {
-    const { children, component, render, location } = this.props
+    const { component, render, location } = this.props
+    const children: any = this.props.children
     const match = this.computeMatch(this.props as any)
     const props = { match, location }
 
