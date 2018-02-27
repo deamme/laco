@@ -130,6 +130,8 @@ export class Switch extends Component<any, any> {
   }
 }
 
+import { createLocation } from 'history'
+
 const isModifiedEvent = event =>
   !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
 
@@ -156,6 +158,8 @@ export class Link extends Component<any, any> {
   };
 
   render() {
-    return <a onClick={this.handleClick}>{this.props.children}</a>
+    const location = createLocation(this.props.to, null, null, history.location)
+    const href = history.createHref(location);
+    return <a href={href} onClick={this.handleClick}>{this.props.children}</a>
   }
 }
