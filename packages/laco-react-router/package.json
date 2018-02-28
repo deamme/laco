@@ -1,6 +1,6 @@
 {
   "name": "laco-react-router",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "React Laco Router management",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -8,7 +8,8 @@
   "author": "Deam Hansen",
   "license": "MIT",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "prepublishOnly": "rimraf dist && yarn build"
   },
   "dependencies": {
     "history": "^4.7.2",
