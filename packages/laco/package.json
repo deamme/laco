@@ -9,7 +9,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "prepublishOnly": "rimraf dist && tsc"
+    "prepublish": "rimraf dist && tsc"
   },
   "devDependencies": {
     "@types/node": "^9.4.6",

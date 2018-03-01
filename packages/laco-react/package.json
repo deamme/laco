@@ -9,7 +9,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "prepublishOnly": "rimraf dist && tsc"
+    "prepublish": "rimraf dist && tsc"
   },
   "dependencies": {
     "react": "^16.2.0"

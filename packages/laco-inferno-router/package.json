@@ -9,7 +9,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc && ts-node compile",
-    "prepublishOnly": "rimraf dist && yarn build"
+    "prepublish": "rimraf dist && yarn build"
   },
   "dependencies": {
     "history": "^4.7.2",

@@ -6,8 +6,10 @@
   "author": "Deam Hansen",
   "license": "MIT",
   "scripts": {
-    "build": "lerna bootstrap",
-    "publish": "lerna bootstrap"
+    "lerna:clean": "lerna clean",
+    "lerna:updated": "lerna updated",
+    "lerna:build": "lerna bootstrap",
+    "lerna:publish": "lerna publish"
   },
   "devDependencies": {
     "lerna": "^2.9.0"
