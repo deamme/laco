@@ -61,6 +61,13 @@ const compilePath = (pattern, options) => {
 const matchPath = (pathname, options) => {
   const { path, exact = false, strict = false, sensitive = false } = options
 
+  if (path == null) return {
+    isExact: true,
+    params: {},
+    path: pathname,
+    url: pathname
+  }
+
   const { re, keys } = compilePath(path, { end: exact, strict, sensitive })
   const match = re.exec(pathname)
 
