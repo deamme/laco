@@ -1,4 +1,4 @@
-# Laco (WIP)
+# Laco
 [![npm version](https://badge.fury.io/js/laco.svg)](https://badge.fury.io/js/laco)
 
 Very simple and powerful state management solution for React and Inferno.
