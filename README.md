@@ -50,6 +50,8 @@ Following commands are available for each example project:
 
 `npm run start:prod`
 
+`npm run test`
+
 ## Redux DevTools Extension
 Checkout [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension).
 ### Time travel
