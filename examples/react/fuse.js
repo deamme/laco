@@ -7,9 +7,9 @@ const {
   CSSPlugin,
   WebIndexPlugin,
   QuantumPlugin,
-} = require('fuse-box');
-let fuse, app;
-let isProduction = false;
+} = require('fuse-box')
+let fuse, app
+let isProduction = false
 
 Sparky.task('config', _ => {
   fuse = new FuseBox({
@@ -18,7 +18,7 @@ Sparky.task('config', _ => {
     output: 'dist/$name.js',
     cache: false,
     sourceMaps: !isProduction,
-    target: "browser",
+    target: 'browser',
     plugins: [
       EnvPlugin({ NODE_ENV: isProduction ? 'production' : 'development' }),
       WebIndexPlugin({
@@ -26,37 +26,36 @@ Sparky.task('config', _ => {
         template: 'src/index.html',
       }),
       isProduction &&
-      QuantumPlugin({
-        bakeApiIntoBundle: 'app',
-        treeshake: true,
-        uglify: false,
-      }),
+        QuantumPlugin({
+          bakeApiIntoBundle: 'app',
+          treeshake: true,
+          uglify: false,
+        }),
     ],
-  });
-  app = fuse.bundle('app').instructions('>index.tsx');
-});
+  })
+  app = fuse.bundle('app').instructions('>index.tsx')
+})
 
-Sparky.task('clean', _ => Sparky.src('dist/').clean('dist/'));
-Sparky.task('env', _ => (isProduction = true));
+Sparky.task('clean', _ => Sparky.src('dist/').clean('dist/'))
+Sparky.task('env', _ => (isProduction = true))
 Sparky.task('dev', ['clean', 'config'], async () => {
   fuse.dev({ root: false }, server => {
-    const dist = path.resolve("./dist");
-    const app = server.httpServer.app;
+    const dist = path.resolve('./dist')
+    const app = server.httpServer.app
     app.use(express.static(dist))
-    app.get("*", function(req, res) {
-        res.sendFile(path.join(dist, "index.html"));
-    });
-  });
-  app.hmr().watch();
+    app.get('*', function(req, res) {
+      res.sendFile(path.join(dist, 'index.html'))
+    })
+  })
+  app.hmr().watch()
 
   await Sparky.watch('src/**/**.*', undefined, (event, file) => {
-    fuse.sendPageReload();
+    fuse.sendPageReload()
   }).exec()
   await fuse.run()
-  
-});
+})
 
 Sparky.task('prod', ['clean', 'env', 'config'], _ => {
-  fuse.dev({ reload: true }); // remove after demo
-  return fuse.run();
-});
+  fuse.dev({ reload: true }) // remove after demo
+  return fuse.run()
+})

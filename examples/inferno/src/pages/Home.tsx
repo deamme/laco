@@ -3,8 +3,6 @@ import { Link } from 'laco-inferno-router'
 import { CounterStore, increment, decrement } from '../stores/CounterStore'
 import Test from './Test'
 
-// console.log(CounterStore)
-
 const Counter = () => (
   <Subscribe to={[CounterStore]}>
     {(state) => (
