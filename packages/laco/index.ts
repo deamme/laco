@@ -7,6 +7,7 @@ if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
   // jsanParse = require('jsan').parse
   if ((window as any).__REDUX_DEVTOOLS_EXTENSION__) {
     devTools = (window as any).__REDUX_DEVTOOLS_EXTENSION__.connect()
+    devTools.init({})
     // const persistedStore = jsanParse(localStorage.getItem('__LACO__'))
     if (window.localStorage) {
       const content = localStorage.getItem('__LACO__')
