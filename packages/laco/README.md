@@ -1,4 +1,4 @@
-# Laco (WIP)
+# Laco
 [![npm version](https://badge.fury.io/js/laco.svg)](https://badge.fury.io/js/laco)
 
 Very simple and powerful state management solution for React and Inferno.
@@ -17,7 +17,8 @@ Set up your stores and subscribe to them. Easy as that!
 ## Example
 ```javascript
 import { render } from 'inferno' // or 'react-dom'
-import { Store, Subscribe } from 'laco'
+import { Store } from 'laco'
+import { Subscribe } from 'laco-inferno' // or 'laco-react'
 
 // Creating a new store with an initial state { count: 0 }
 const CounterStore = new Store({ count: 0 })
@@ -49,8 +50,10 @@ Following commands are available for each example project:
 
 `npm run start:prod`
 
+`npm run test`
+
 ## Redux DevTools Extension
-Checkout [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension).
+Check out [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension).
 ### Time travel
 Just click on the stopwatch icon and you will get a slider which you can play with.
 That's it! :)
@@ -61,7 +64,7 @@ Persistence of state is **ON** by default when in **development mode** so a full
 You may want to **RESET** the persisted state, you can do that by using the PAUSE button on the DevTools Extension. This a bit of a hack because the persist state button on the extension does not have an API for it.
 
 ## React Native Debugger
-Checkout [React Native Debugger](https://github.com/jhen0409/react-native-debugger).
+Check out [React Native Debugger](https://github.com/jhen0409/react-native-debugger).
 ### Time travel
 Works as you would expect :)!
 
@@ -147,11 +150,18 @@ The `Subscribe` component is making use of the new render prop idea. Related art
 - [Apollo Query Component](https://dev-blog.apollodata.com/whats-next-for-react-apollo-4d41ba12c2cb)
 - [Use a render prop!](https://cdb.reacttraining.com/use-a-render-prop-50de598f11ce)
 
+## Routing
+`laco-inferno-router` and `laco-react-router` is a replacement for [Redux First Router](https://github.com/faceyspacey/redux-first-router) which makes routing a part of the state.
+
+You can dispatch routing related actions and get them logged in the debugger and routing now also works with time travel.
+
+The general API is similar to [React Router](https://github.com/ReactTraining/react-router). Check out more about react routing [here](https://github.com/deamme/laco/tree/master/packages/laco-react-router) and inferno routing [here](https://github.com/deamme/laco/tree/master/packages/laco-inferno-router).
+
 ## Testing
 Testing using [tape](https://github.com/substack/tape):
 ```javascript
 import * as test from 'tape'
-import { CounterStore, increment, decrement } from './index'
+import { CounterStore, increment, decrement } from './CounterStore'
 
 test('counter', (t) => {
   CounterStore.reset()
