@@ -11,9 +11,9 @@
   "author": "Deam Hansen",
   "license": "MIT",
   "dependencies": {
-    "laco": "^0.0.7",
-    "laco-react": "^0.0.7",
-    "laco-react-router": "^0.0.9",
+    "laco": "^0.1.0",
+    "laco-react": "^0.1.0",
+    "laco-react-router": "^0.1.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
@@ -24,7 +24,6 @@
     "fuse-box": "^3.1.3",
     "tape": "^4.9.0",
     "ts-node": "^5.0.1",
-    "ts-transform-css-modules-next": "^0.2.1",
     "uglify-es": "^3.3.7"
   }
 }

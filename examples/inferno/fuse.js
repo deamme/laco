@@ -8,7 +8,6 @@ const {
   WebIndexPlugin,
   QuantumPlugin,
 } = require('fuse-box')
-const transformCSS = require('ts-transform-css-modules-next').default
 const transformInferno = require('ts-transform-inferno').default
 let fuse, app
 let isProduction = false
