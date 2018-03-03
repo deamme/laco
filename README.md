@@ -155,7 +155,7 @@ The `Subscribe` component is making use of the new render prop idea. Related art
 
 You can dispatch routing related actions and get them logged in the debugger and routing now also works with time travel.
 
-The general API is similar to [React Router](https://github.com/ReactTraining/react-router). Check out more about react routing [here](https://github.com/deamme/laco/tree/master/packages/laco-react-router) and inferno routing [here](https://github.com/deamme/laco/tree/master/packages/laco-inferno-router).
+The general API is similar to [React Router](https://github.com/ReactTraining/react-router). Check out more about Laco React routing [here](https://github.com/deamme/laco/tree/master/packages/laco-react-router) and Laco Inferno routing [here](https://github.com/deamme/laco/tree/master/packages/laco-inferno-router).
 
 ## Testing
 Testing using [tape](https://github.com/substack/tape):
