@@ -5,6 +5,8 @@ Very simple and powerful state management solution for React and Inferno.
 
 Set up your stores and subscribe to them. Easy as that!
 
+[Check out the introductory blog post](https://medium.com/@Deam/laco-intro-5db2077ec829).
+
 `npm install laco`
 
 `npm install laco-inferno` or `npm install laco-react`
