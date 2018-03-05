@@ -63,6 +63,8 @@ Persistence of state is **ON** by default when in **development mode** so a full
 
 You may want to **RESET** the persisted state, you can do that by using the PAUSE button on the DevTools Extension. This a bit of a hack because the persist state button on the extension does not have an API for it.
 
+You can also **RESET** the persisted state by writing `__LACO__.reset()` into the console in a given browser.
+
 ## React Native Debugger
 Check out [React Native Debugger](https://github.com/jhen0409/react-native-debugger).
 ### Time travel

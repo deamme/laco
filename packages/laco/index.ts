@@ -8,6 +8,13 @@ if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
   if ((window as any).__REDUX_DEVTOOLS_EXTENSION__) {
     devTools = (window as any).__REDUX_DEVTOOLS_EXTENSION__.connect()
     devTools.init({})
+    const resetPersistedState = () => {
+      if (window.localStorage) {
+        localStorage.setItem('__LACO__', '')
+      }
+      location.reload()
+    }
+    (window as any).__LACO__ = { reset: resetPersistedState }
     // const persistedStore = jsanParse(localStorage.getItem('__LACO__'))
     if (window.localStorage) {
       const content = localStorage.getItem('__LACO__')
