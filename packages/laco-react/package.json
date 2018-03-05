@@ -1,6 +1,6 @@
 {
   "name": "laco-react",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "React <Subscribe /> component for Laco state management",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
