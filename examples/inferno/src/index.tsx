@@ -7,7 +7,7 @@ import Home from './pages/Home'
 import Test from './pages/Test'
 import NoMatch from './pages/NoMatch'
 
-const Counter = () => (
+const App = () => (
   <Subscribe to={[RouterStore]}>
     {state => (
       <Switch location={state.pathname}>
@@ -19,4 +19,4 @@ const Counter = () => (
   </Subscribe>
 )
 
-render(<Counter />, document.getElementById('root'))
+render(<App />, document.getElementById('root'))
