@@ -35,6 +35,7 @@ export class Store {
   _listeners = []
   devTools
   initialState
+  condition
 
   constructor(initialState: Object, name?: string) {
     if (name) this.name = name
@@ -71,10 +72,17 @@ export class Store {
   }
 
   set(state: Object | Function, info?: String) {
-    STORE[this.idx] =
-      typeof state === 'function'
+    if (this.condition) {
+      const newState = typeof state === 'function'
+        ? this.condition(state(STORE[this.idx]))
+        : this.condition({ ...STORE[this.idx], ...state })
+
+      if (newState) { STORE[this.idx] = newState }
+    } else {
+      STORE[this.idx] = typeof state === 'function'
         ? state(STORE[this.idx])
         : { ...STORE[this.idx], ...state }
+    }
 
     if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
       if (window.localStorage) {
@@ -86,6 +94,10 @@ export class Store {
     }
 
     this._listeners.forEach(fn => fn())
+  }
+
+  setCondition(func: Function) {
+    this.condition = func
   }
 
   reset() {

@@ -107,6 +107,21 @@ Immutability is taking care of to a certain extent behind the scenes with the sp
 Store.set((state) => { /* return modified state */}, "increment")
 ```
 
+### `Store.setCondition()`
+#### Arguments
+1. [Required] - Function
+```javascript
+// Setting a condition to prevent count from going below 0
+CounterStore.setCondition((state) => {
+  // Returning the state if it's 0 or above
+  if (state.count >= 0) {
+    return state
+  }
+  // Otherwise return nothing which does NOT change any state
+})
+```
+Setting a condition on a store will make every `Store.set()` call go through the condition first.
+
 ### `Store.reset()`
 ```javascript
 // Resets the store to initial state
