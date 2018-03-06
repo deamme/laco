@@ -1,14 +1,14 @@
 import * as React from 'react'
 import { Subscribe } from 'laco-react'
 import { Link } from 'laco-react-router'
-import { CounterStore, increment, decrement } from '../stores/CounterStore'
+import { CounterStore, increment, sudoDecrement } from '../stores/CounterStore'
 import Test from './Test'
 
 const Counter = () => (
   <Subscribe to={[CounterStore]}>
     {(state) => (
       <div>
-        <button onClick={decrement}>-</button>
+        <button onClick={sudoDecrement}>-</button>
         <span>{state.count}</span>
         <button onClick={increment}>+</button>
       </div>
