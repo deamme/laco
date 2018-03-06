@@ -14,9 +14,9 @@
     "history": "^4.7.2",
     "inferno": "^4.0.2",
     "jsan": "^3.1.9",
-    "laco": "^0.2.0",
-    "laco-inferno": "^0.2.0",
-    "laco-inferno-router": "^0.2.0"
+    "laco": "^0.2.1",
+    "laco-inferno": "^0.2.1",
+    "laco-inferno-router": "^0.2.1"
   },
   "devDependencies": {
     "express": "^4.16.2",

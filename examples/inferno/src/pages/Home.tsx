@@ -1,6 +1,6 @@
 import { Subscribe } from 'laco-inferno'
 import { Link } from 'laco-inferno-router'
-import { CounterStore, increment, decrement } from '../stores/CounterStore'
+import { CounterStore, increment, decrement, sudoDecrement } from '../stores/CounterStore'
 import Test from './Test'
 
 const Counter = () => (
@@ -10,6 +10,7 @@ const Counter = () => (
         <button onclick={decrement}>-</button>
         <span>{state.count}</span>
         <button onclick={increment}>+</button>
+        <button onclick={sudoDecrement}>Go below zero</button>
       </div>
     )}
   </Subscribe>
