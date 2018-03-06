@@ -74,8 +74,8 @@ export class Store {
   set(state: Object | Function, info?: String) {
     if (this.condition) {
       const newState = typeof state === 'function'
-        ? this.condition(state(STORE[this.idx]))
-        : this.condition({ ...STORE[this.idx], ...state })
+        ? this.condition(state(STORE[this.idx]), info)
+        : this.condition({ ...STORE[this.idx], ...state }, info)
 
       if (newState) { STORE[this.idx] = newState }
     } else {

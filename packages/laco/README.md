@@ -112,9 +112,11 @@ Store.set((state) => { /* return modified state */}, "increment")
 1. [Required] - Function
 ```javascript
 // Setting a condition to prevent count from going below 0
-CounterStore.setCondition((state) => {
-  // Returning the state if it's 0 or above
+// and a special case for `SudoDecrement` action which CAN make count go below 0
+CounterStore.setCondition((state, actiontype) => {
   if (state.count >= 0) {
+    return state
+  } else if (actionType === 'SudoDecrement') {
     return state
   }
   // Otherwise return nothing which does NOT change any state
