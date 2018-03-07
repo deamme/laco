@@ -9,9 +9,14 @@
     "lerna:clean": "lerna clean",
     "lerna:updated": "lerna updated",
     "lerna:build": "lerna bootstrap",
-    "lerna:publish": "lerna publish"
+    "lerna:publish": "lerna publish",
+    "test": "ts-node node_modules/tape/bin/tape tests/**/*.ts"
   },
   "devDependencies": {
-    "lerna": "^2.9.0"
+    "laco": "^0.2.1",
+    "lerna": "^2.9.0",
+    "tape": "^4.9.0",
+    "ts-node": "^5.0.1",
+    "typescript": "^2.7.2"
   }
 }

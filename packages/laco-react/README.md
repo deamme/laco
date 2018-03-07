@@ -1,5 +1,6 @@
 # Laco
 [![npm version](https://badge.fury.io/js/laco.svg)](https://badge.fury.io/js/laco)
+[![travis](https://travis-ci.org/deamme/laco.svg?branch=master)](https://travis-ci.org/deamme/laco)
 
 Very simple and powerful state management solution for React and Inferno.
 
