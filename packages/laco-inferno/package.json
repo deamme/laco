@@ -1,6 +1,6 @@
 {
   "name": "laco-inferno",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Inferno <Subscribe /> component for Laco state management",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
