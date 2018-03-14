@@ -166,6 +166,6 @@ export class Link extends Component<any, any> {
   render() {
     const location = createLocation(this.props.to, null, null, history.location)
     const href = history.createHref(location);
-    return <a href={href} onClick={this.handleClick}>{this.props.children}</a>
+    return <a {...this.props} href={href} onClick={this.handleClick}>{this.props.children}</a>
   }
 }
