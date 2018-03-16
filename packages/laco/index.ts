@@ -1,4 +1,7 @@
 // let jsanParse
+let STORE = {}
+let COUNTER = 0
+
 let devTools
 let persistedStore
 
@@ -25,9 +28,6 @@ if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
     }
   }
 }
-
-let STORE = {}
-let COUNTER = 0
 
 export class Store {
   idx
