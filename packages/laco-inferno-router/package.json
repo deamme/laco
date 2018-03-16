@@ -21,6 +21,6 @@
   "devDependencies": {
     "rimraf": "^2.6.2",
     "ts-node": "^5.0.0",
-    "ts-transform-inferno": "^2.0.0"
+    "ts-transform-inferno": "^2.1.0"
   }
 }
