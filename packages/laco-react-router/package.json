@@ -1,6 +1,6 @@
 {
   "name": "laco-react-router",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "React Laco Router management",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "history": "^4.7.2",
-    "laco": "^0.2.2",
+    "laco": "^0.2.4",
     "path-to-regexp": "^2.1.0",
     "react": "^16.2.0"
   },
