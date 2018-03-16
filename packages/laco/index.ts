@@ -45,7 +45,7 @@ export class Store {
 
     if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
       if (devTools) {
-        if (persistedStore) {
+        if (persistedStore && name !== 'Router') {
           STORE[this.idx] = persistedStore[this.idx]
         }
 
