@@ -23,8 +23,11 @@ history.listen(location => {
   )
 })
 
-export const push = (path: string) =>
-  RouterStore.dispatch(history.push(path), 'PUSH')
+export const push = (path: string) => {
+  if (path !== RouterStore.get().pathname) {
+    RouterStore.dispatch(history.push(path), 'PUSH')
+  }
+}
 export const replace = (path: string) =>
   RouterStore.dispatch(history.replace(path), 'REPLACE')
 export const go = (n: number) => RouterStore.dispatch(history.go(n), 'GO')
