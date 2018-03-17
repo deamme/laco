@@ -22,6 +22,6 @@
     "ts-transform-inferno": "^2.1.0"
   },
   "peerDependencies": {
-    "inferno": "5.0.0-2"
+    "inferno": "^5.0.0"
   }
 }

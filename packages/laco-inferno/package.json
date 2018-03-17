@@ -16,6 +16,6 @@
     "typescript": "^2.7.1"
   },
   "peerDependencies": {
-    "inferno": "5.0.0-2"
+    "inferno": "^5.0.0"
   }
 }

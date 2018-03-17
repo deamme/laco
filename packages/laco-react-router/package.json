@@ -14,12 +14,14 @@
   "dependencies": {
     "history": "^4.7.2",
     "laco": "^0.2.4",
-    "path-to-regexp": "^2.1.0",
-    "react": "^16.2.0"
+    "path-to-regexp": "^2.1.0"
   },
   "devDependencies": {
     "@types/react": "^16.0.38",
     "rimraf": "^2.6.2",
     "typescript": "^2.7.1"
+  },
+  "peerDependencies": {
+    "react": "^16.2.0"
   }
 }
