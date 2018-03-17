@@ -1,6 +1,6 @@
 {
   "name": "laco-inferno",
-  "version": "0.2.2",
+  "version": "0.2.6-0",
   "description": "Inferno <Subscribe /> component for Laco state management",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -12,8 +12,8 @@
     "prepublish": "rimraf dist && tsc"
   },
   "dependencies": {
-    "inferno": "^4.0.4",
-    "inferno-shared": "^4.0.4"
+    "inferno": "5.0.0-1",
+    "inferno-shared": "5.0.0-1"
   },
   "devDependencies": {
     "rimraf": "^2.6.2",
