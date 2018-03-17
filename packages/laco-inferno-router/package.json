@@ -1,6 +1,6 @@
 {
   "name": "laco-inferno-router",
-  "version": "0.2.6-0",
+  "version": "0.2.6-1",
   "description": "Inferno Laco Router management",
   "main": "dist/index.jsx",
   "typings": "dist/index.d.ts",
@@ -13,8 +13,6 @@
   },
   "dependencies": {
     "history": "^4.7.2",
-    "inferno": "5.0.0-1",
-    "inferno-shared": "5.0.0-1",
     "laco": "^0.2.4",
     "path-to-regexp": "^2.1.0"
   },
@@ -22,5 +20,9 @@
     "rimraf": "^2.6.2",
     "ts-node": "^5.0.0",
     "ts-transform-inferno": "^2.1.0"
+  },
+  "peerDependencies": {
+    "inferno": "5.0.0-2",
+    "inferno-shared": "5.0.0-2"
   }
 }
