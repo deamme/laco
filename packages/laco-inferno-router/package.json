@@ -1,6 +1,6 @@
 {
   "name": "laco-inferno-router",
-  "version": "0.2.6-2",
+  "version": "0.3.0",
   "description": "Inferno Laco Router management",
   "main": "dist/index.jsx",
   "typings": "dist/index.d.ts",
