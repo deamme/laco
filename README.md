@@ -62,9 +62,9 @@ Just click on the stopwatch icon and you will get a slider which you can play wi
 That's it! :)
 
 ### State persistence
-Persistence of state is **ON** by default when in **development mode** so a full page refresh does not destroy your state. This makes hot-reloading like [react-hot-loader](https://github.com/gaearon/react-hot-loader) absolute because you already have a persisting state. The only caveat is that a full page refresh may seem slower by a tiny bit.
+Persistence of state is **ON** by default when in **development mode** so a full page refresh does not destroy your state. This makes hot-reloading like [react-hot-loader](https://github.com/gaearon/react-hot-loader) absolute because you already have a persisting state. The only caveat is that a full page refresh might seem slower by a tiny bit.
 
-You may want to **RESET** the persisted state, you can do that by using the PAUSE button on the DevTools Extension. This a bit of a hack because the persist state button on the extension does not have an API for it.
+You might want to **RESET** the persisted state, you can do that by using the PAUSE button on the DevTools Extension. This a bit of a hack because the persist state button on the extension does not have an API for it.
 
 You can also **RESET** the persisted state by writing `__LACO__.reset()` into the console in a given browser.
 
@@ -102,7 +102,7 @@ Returns an object which could be something like `{ count: 0 }` following the exa
 // Setting a new state and passing an optional action name "increment"
 Store.set({ count: CounterStore.get().count + 1 }, "increment")
 ```
-Immutability is taking care of to a certain extent behind the scenes with the spread operator but you may want more control over the state. You can do this by passing a function like so:
+Immutability is taking care of to a certain extent behind the scenes with the spread operator but you might want more control over the state. You can do this by passing a function like so:
 ```javascript
 // Setting a new state and passing an optional action name "increment"
 Store.set((state) => { /* return modified state */}, "increment")
@@ -130,7 +130,7 @@ Setting a condition on a store will make every `Store.set()` call go through the
 // Resets the store to initial state
 Store.reset()
 ```
-A good practice when testing is to call `reset()` on a store before using the store in a test. This takes care of some edge cases that you may run into. The reason for this is that Laco is using a global object behind the scenes to store all of your stores states into one big object. Redux also operates on one global object which makes time travel possible.
+A good practice when testing is to call `reset()` on a store before using the store in a test. This takes care of some edge cases that you might run into. The reason for this is that Laco is using a global object behind the scenes to store all of your stores states into one big object. Redux also operates on one global object which makes time travel possible.
 
 ### `Store.dispatch()`
 #### Arguments
@@ -140,7 +140,7 @@ A good practice when testing is to call `reset()` on a store before using the st
 // Dispatching an action that does not change the state of the store
 Store.dispatch(changeLocation(), "Location change")
 ```
-You may want to dispatch an action that is associated with a certain store but don't want to change the state. The action will in this case be shown as `StoreName - Location change`.
+You might want to dispatch an action that is associated with a certain store but don't want to change the state. The action will in this case be shown as `StoreName - Location change`.
 
 ### `dispatch()`
 #### Arguments
@@ -152,7 +152,7 @@ import { dispatch } from 'laco'
 // Dispatching a global action that does not change any state
 dispatch(changeLocation(), "Location change")
 ```
-You may want to dispatch a global action that is **NOT** associated with any store. The action will in this case just be shown as `Location change`.
+You might want to dispatch a global action that is **NOT** associated with any store. The action will in this case just be shown as `Location change`.
 
 ### `<Subscribe />`
 #### Props
