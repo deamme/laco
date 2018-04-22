@@ -13,7 +13,7 @@
     "test": "ts-node node_modules/tape/bin/tape tests/**/*.ts"
   },
   "devDependencies": {
-    "laco": "^0.2.1",
+    "laco": "^0.4.0",
     "lerna": "^2.9.0",
     "tape": "^4.9.0",
     "ts-node": "^5.0.1",

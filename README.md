@@ -15,7 +15,7 @@ Set up your stores and subscribe to them. Easy as that!
 ## Summary
 - :rocket: Simple to use
 - :tada: Lightweight (under 1kb in size)
-- :sparkles: Partial [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension) support (time travel and persist state)
+- :sparkles: Partial [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension) support (time travel)
 
 ## Example
 ```javascript
@@ -61,20 +61,10 @@ Check out [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtool
 Just click on the stopwatch icon and you will get a slider which you can play with.
 That's it! :)
 
-### State persistence
-Persistence of state is **ON** by default when in **development mode** so a full page refresh does not destroy your state. This makes hot-reloading like [react-hot-loader](https://github.com/gaearon/react-hot-loader) absolute because you already have a persisting state. The only caveat is that a full page refresh might seem slower by a tiny bit.
-
-You might want to **RESET** the persisted state, you can do that by using the PAUSE button on the DevTools Extension. This a bit of a hack because the persist state button on the extension does not have an API for it.
-
-You can also **RESET** the persisted state by writing `__LACO__.reset()` into the console in a given browser.
-
 ## React Native Debugger
 Check out [React Native Debugger](https://github.com/jhen0409/react-native-debugger).
 ### Time travel
 Works as you would expect :)!
-
-### State persistence
-Persistence of state is not supported for React Native Debugger but turning hot-reloading **ON** gives the same benefit!
 
 ## API
 ### `Store`

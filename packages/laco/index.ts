@@ -1,6 +1,5 @@
 // let jsanParse
 let devTools
-let persistedStore
 
 if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
   console.log(`You're currently using a development version of Laco`)
@@ -8,21 +7,6 @@ if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
   if ((window as any).__REDUX_DEVTOOLS_EXTENSION__) {
     devTools = (window as any).__REDUX_DEVTOOLS_EXTENSION__.connect()
     devTools.init({})
-    const resetPersistedState = () => {
-      if (window.localStorage) {
-        localStorage.setItem('__LACO__', '')
-      }
-      location.reload()
-    }
-    (window as any).__LACO__ = { reset: resetPersistedState }
-    // const persistedStore = jsanParse(localStorage.getItem('__LACO__'))
-    if (window.localStorage) {
-      const content = localStorage.getItem('__LACO__')
-      if (content) {
-        persistedStore = JSON.parse(content)
-        devTools.init(persistedStore)
-      }
-    }
   }
 }
 
@@ -45,22 +29,12 @@ export class Store {
 
     if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
       if (devTools) {
-        if (persistedStore && name !== 'Router') {
-          STORE[this.idx] = persistedStore[this.idx]
-        }
-
         devTools.subscribe(message => {
           switch (message.payload && message.payload.type) {
             case 'JUMP_TO_STATE':
             case 'JUMP_TO_ACTION':
               STORE[this.idx] = JSON.parse(message.state)[this.idx]
               this._listeners.forEach(fn => fn())
-              break
-            case 'PAUSE_RECORDING':
-              if (window.localStorage) {
-                localStorage.setItem('__LACO__', '')
-              }
-              location.reload()
           }
         })
       }
