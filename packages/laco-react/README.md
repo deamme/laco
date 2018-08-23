@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://i.imgur.com/jKG9XYF.png" width="80%">
+</p>
+
 # Laco
 [![npm version](https://badge.fury.io/js/laco.svg)](https://badge.fury.io/js/laco)
 [![travis](https://travis-ci.org/deamme/laco.svg?branch=master)](https://travis-ci.org/deamme/laco)
@@ -19,16 +23,15 @@ Set up your stores and subscribe to them. Easy as that!
 
 ## Example
 ```javascript
-import { render } from 'inferno' // or 'react-dom'
 import { Store } from 'laco'
-import { Subscribe } from 'laco-inferno' // or 'laco-react'
+import { Subscribe } from 'laco-react' // or 'laco-inferno'
 
 // Creating a new store with an initial state { count: 0 }
 const CounterStore = new Store({ count: 0 })
 
 // Implementing some actions to update the store
-const increment = () => CounterStore.set({ count: CounterStore.get().count + 1 })
-const decrement = () => CounterStore.set({ count: CounterStore.get().count - 1 })
+const increment = () => CounterStore.set((state) => ({ count: state.count + 1 }))
+const decrement = () => CounterStore.set((state) => ({ count: state.count - 1 }))
 
 const Counter = () => (
   <Subscribe to={[CounterStore]}>
@@ -41,8 +44,6 @@ const Counter = () => (
     )}
   </Subscribe>
 )
-
-render(<Counter />, document.getElementById('root'))
 ```
 
 For more examples check the examples folder.
@@ -67,10 +68,7 @@ Check out [React Native Debugger](https://github.com/jhen0409/react-native-debug
 Works as you would expect :)!
 
 ## API
-### `Store`
-#### Arguments
-1. [Required] - Object
-2. [Optional] - String
+### `Store(initialState: Object, name?: String)`
 ```javascript
 // Initializing a new store with an initial state and a name:
 const NewStore = Store({ count: 0 }, "Counter")
@@ -84,23 +82,20 @@ Store.get()
 ```
 Returns an object which could be something like `{ count: 0 }` following the example.
 
-### `Store.set()`
-#### Arguments
-1. [Required] - Function or Object
-2. [Optional] - String
+### `Store.set(state: Function, info?: String)`
 ```javascript
 // Setting a new state and passing an optional action name "increment"
-Store.set({ count: CounterStore.get().count + 1 }, "increment")
-```
-Immutability is taking care of to a certain extent behind the scenes with the spread operator but you might want more control over the state. You can do this by passing a function like so:
-```javascript
-// Setting a new state and passing an optional action name "increment"
-Store.set((state) => { /* return modified state */}, "increment")
+Store.set((state) => { count: state.count + 1 }, "increment")
 ```
 
-### `Store.setCondition()`
-#### Arguments
-1. [Required] - Function
+### `Store.replace(state: Function, info?: String)`
+Immutability is taking care of to a certain extent behind the scenes with the spread operator with `Store.set()` but you might want more control over the state. You can do this by using `Store.replace()` like so:
+```javascript
+// Setting a new state and passing an optional action name "increment"
+Store.replace((state) => { /* return modified state */}, "increment")
+```
+
+### `Store.setCondition(condition: Function)`
 ```javascript
 // Setting a condition to prevent count from going below 0
 // and a special case for `SudoDecrement` action which CAN make count go below 0
@@ -122,20 +117,14 @@ Store.reset()
 ```
 A good practice when testing is to call `reset()` on a store before using the store in a test. This takes care of some edge cases that you might run into. The reason for this is that Laco is using a global object behind the scenes to store all of your stores states into one big object. Redux also operates on one global object which makes time travel possible.
 
-### `Store.dispatch()`
-#### Arguments
-1. [Required] - Some side effect
-2. [Required] - String
+### `Store.dispatch(value: any, info: String)`
 ```javascript
 // Dispatching an action that does not change the state of the store
 Store.dispatch(changeLocation(), "Location change")
 ```
 You might want to dispatch an action that is associated with a certain store but don't want to change the state. The action will in this case be shown as `StoreName - Location change`.
 
-### `dispatch()`
-#### Arguments
-1. [Required] - Some side effect
-2. [Required] - String
+### `dispatch(value: any, info: String)`
 ```javascript
 import { dispatch } from 'laco'
 
@@ -161,13 +150,6 @@ You might want to dispatch a global action that is **NOT** associated with any s
 The `Subscribe` component is making use of the new render prop idea. Related articles:
 - [Apollo Query Component](https://dev-blog.apollodata.com/whats-next-for-react-apollo-4d41ba12c2cb)
 - [Use a render prop!](https://cdb.reacttraining.com/use-a-render-prop-50de598f11ce)
-
-## Routing
-`laco-inferno-router` and `laco-react-router` is a replacement for [Redux First Router](https://github.com/faceyspacey/redux-first-router) which makes routing a part of the state.
-
-You can dispatch routing related actions and get them logged in the debugger and routing now also works with time travel.
-
-The general API is similar to [React Router](https://github.com/ReactTraining/react-router). Check out more about Laco React routing [here](https://github.com/deamme/laco/tree/master/packages/laco-react-router) and Laco Inferno routing [here](https://github.com/deamme/laco/tree/master/packages/laco-inferno-router).
 
 ## Testing
 Testing using [tape](https://github.com/substack/tape):
