@@ -125,7 +125,6 @@ Store.dispatch(changeLocation(), "Location change")
 You might want to dispatch an action that is associated with a certain store but don't want to change the state. The action will in this case be shown as `StoreName - Location change`.
 
 ### `dispatch(value: any, info: String)`
-#### Arguments
 ```javascript
 import { dispatch } from 'laco'
 
