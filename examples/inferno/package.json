@@ -12,9 +12,8 @@
   "license": "MIT",
   "dependencies": {
     "inferno": "^5.0.0",
-    "jsan": "^3.1.9",
-    "laco": "^0.4.0",
-    "laco-inferno": "^0.4.0"
+    "laco": "v1.0.0-alpha.0",
+    "laco-inferno": "v1.0.0-alpha.0"
   },
   "devDependencies": {
     "express": "^4.16.2",

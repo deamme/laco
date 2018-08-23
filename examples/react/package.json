@@ -11,8 +11,8 @@
   "author": "Deam Hansen",
   "license": "MIT",
   "dependencies": {
-    "laco": "^0.4.0",
-    "laco-react": "^0.4.0",
+    "laco": "v1.0.0-alpha.0",
+    "laco-react": "v1.0.0-alpha.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
