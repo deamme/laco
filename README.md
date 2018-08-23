@@ -18,7 +18,7 @@ Set up your stores and subscribe to them. Easy as that!
 
 ## Summary
 - :rocket: Simple to use
-- :tada: Lightweight (under 1kb in size)
+- :tada: Lightweight (under 2kb minified)
 - :sparkles: Partial [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension) support (time travel)
 
 ## Example
@@ -46,7 +46,7 @@ const Counter = () => (
 )
 ```
 
-For more examples check the examples folder.
+For more examples check this [sandbox](https://codesandbox.io/s/9rp990wky) or the examples folder.
 
 Following commands are available for each example project:
 
