@@ -14,6 +14,7 @@ CounterStore.setCondition((state, actionType) => {
 })
 
 // Implementing some actions to update the store
-export const increment = () => CounterStore.set({ count: CounterStore.get().count + 1 }, 'Increment')
-export const decrement = () => CounterStore.set({ count: CounterStore.get().count - 1 }, 'Decrement')
-export const sudoDecrement = () => CounterStore.set({ count: CounterStore.get().count - 1 }, 'SudoDecrement')
+export const increment = () => CounterStore.set((state) => ({ count: state.count + 1 }), 'Increment')
+export const decrement = () => CounterStore.set((state) => ({ count: state.count - 1 }), 'Decrement')
+export const sudoDecrement = () => CounterStore.set((state) => ({ count: state.count - 1 }), 'SudoDecrement')
+
