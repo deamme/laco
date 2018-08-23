@@ -6,17 +6,15 @@
   "author": "Deam Hansen",
   "license": "MIT",
   "scripts": {
-    "lerna:clean": "lerna clean",
-    "lerna:updated": "lerna updated",
-    "lerna:build": "lerna bootstrap",
-    "lerna:publish": "lerna publish",
-    "test": "ts-node node_modules/tape/bin/tape tests/**/*.ts"
+    "clean": "lerna clean",
+    "updated": "lerna updated",
+    "bootstrap": "lerna bootstrap",
+    "publish": "lerna publish",
+    "build": "lerna run build",
+    "test": "lerna run test"
   },
   "devDependencies": {
-    "laco": "^0.4.0",
-    "lerna": "^2.9.0",
-    "tape": "^4.9.0",
-    "ts-node": "^5.0.1",
-    "typescript": "^2.7.2"
+    "lerna": "^3.1.4",
+    "typescript": "^3.0.1"
   }
 }
