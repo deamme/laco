@@ -1,9 +1,7 @@
-// let jsanParse
 let devTools
 
 if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
   console.log(`You're currently using a development version of Laco`)
-  // jsanParse = require('jsan').parse
   if ((window as any).__REDUX_DEVTOOLS_EXTENSION__) {
     devTools = (window as any).__REDUX_DEVTOOLS_EXTENSION__.connect()
     devTools.init({})
@@ -45,17 +43,32 @@ export class Store {
     return STORE[this.idx]
   }
 
-  set(state: Object | Function, info?: String) {
+  set(state: Function, info?: String) {
     if (this.condition) {
-      const newState = typeof state === 'function'
-        ? this.condition(state(STORE[this.idx]), info)
-        : this.condition({ ...STORE[this.idx], ...state }, info)
-
-      if (newState) { STORE[this.idx] = newState }
+      const newState = this.condition({ ...state(STORE[this.idx]), ...state }, info)
+      if (newState) STORE[this.idx] = newState
     } else {
-      STORE[this.idx] = typeof state === 'function'
-        ? state(STORE[this.idx])
-        : { ...STORE[this.idx], ...state }
+      STORE[this.idx] = { ...state(STORE[this.idx]), ...state }
+    }
+
+    if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
+      if (window.localStorage) {
+        localStorage.setItem('__LACO__', JSON.stringify(STORE))
+      }
+      if (devTools) {
+        devTools.send(this.name ? this.name + ' - ' + info : info, STORE)
+      }
+    }
+
+    this._listeners.forEach(fn => fn())
+  }
+
+  replace(state: Function, info?: String) {
+    if (this.condition) {
+      const newState = this.condition(state(STORE[this.idx]), info)
+      if (newState) STORE[this.idx] = newState
+    } else {
+      STORE[this.idx] = state(STORE[this.idx])
     }
 
     if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {

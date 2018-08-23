@@ -18,7 +18,7 @@ export class Subscribe extends Component<any, any> {
   }
 
   onUpdate = () => {
-    this.setState({})
+    this.forceUpdate()
   }
 
   render() {

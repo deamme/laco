@@ -9,11 +9,14 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "prepublish": "rimraf dist && tsc"
+    "prepublish": "rimraf dist && tsc",
+    "test": "ts-node node_modules/tape/bin/tape tests/**/*.ts"
   },
   "devDependencies": {
     "@types/node": "^9.4.6",
     "rimraf": "^2.6.2",
+    "tape": "^4.9.1",
+    "ts-node": "^7.0.1",
     "typescript": "^2.7.1"
   }
 }

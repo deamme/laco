@@ -1,20 +1,19 @@
-
 {
   "compileOnSave": true,
   "compilerOptions": {
-      "target": "es5",
-      "module": "commonjs",
-      "declaration": true,
-      "experimentalDecorators": true,
-      "moduleResolution": "node",
-      "noUnusedLocals": true,
-      "noUnusedParameters": true,
-      "stripInternal": true,
-      "jsx": "preserve",
-      "outDir": "dist",
-      "lib": [ "es2015", "dom"]
+    "target": "es5",
+    "module": "commonjs",
+    "declaration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "stripInternal": true,
+    "jsx": "preserve",
+    "outDir": "dist",
+    "lib": ["es2015", "dom"],
+    "skipLibCheck": true
   },
-  "files": [
-      "index.ts"
-  ],
+  "files": ["index.ts"],
+  "exclude": ["node_modules"]
 }

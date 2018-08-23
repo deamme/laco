@@ -1,6 +1,6 @@
-import { Component } from 'react'
+import { PureComponent } from 'react'
 
-export class Subscribe extends Component<any, any> {
+export class Subscribe extends PureComponent<any, any> {
   stores = []
 
   componentWillReceiveProps() {
@@ -18,7 +18,7 @@ export class Subscribe extends Component<any, any> {
   }
 
   onUpdate = () => {
-    this.setState({})
+    this.forceUpdate()
   }
 
   render() {
