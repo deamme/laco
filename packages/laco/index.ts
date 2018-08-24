@@ -52,9 +52,6 @@ export class Store {
     }
 
     if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
-      if (window.localStorage) {
-        localStorage.setItem('__LACO__', JSON.stringify(STORE))
-      }
       if (devTools) {
         devTools.send(this.name ? this.name + ' - ' + info : info, STORE)
       }
@@ -72,9 +69,6 @@ export class Store {
     }
 
     if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
-      if (window.localStorage) {
-        localStorage.setItem('__LACO__', JSON.stringify(STORE))
-      }
       if (devTools) {
         devTools.send(this.name ? this.name + ' - ' + info : info, STORE)
       }
