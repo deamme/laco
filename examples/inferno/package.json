@@ -12,7 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "inferno": "^5.0.0",
-    "laco": "^1.0.0",
+    "laco": "^1.1.0",
     "laco-inferno": "^1.0.0"
   },
   "devDependencies": {
