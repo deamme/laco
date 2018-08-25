@@ -97,15 +97,15 @@ Store.replace((state) => { /* return modified state */}, "increment")
 
 ### `Store.setCondition(condition: Function)`
 ```javascript
-// Setting a condition to prevent count from going below 0
-// and a special case for `SudoDecrement` action which CAN make count go below 0
-CounterStore.setCondition((state, actiontype) => {
-  if (state.count >= 0) {
-    return state
-  } else if (actionType === 'SudoDecrement') {
-    return state
+// Setting a condition to prevent count from going below 0 when `actionType` is `Decrement`
+CounterStore.setCondition((state, actionType) => {
+  if (state.count < 0 && actionType === "Decrement") {
+    // Returning a falsy value will prevent the state from changing
+    return false;
   }
-  // Otherwise return nothing which does NOT change any state
+
+  // For every other `actionTypes` such as `SudoDecrement` will change the state
+  return state;
 })
 ```
 Setting a condition on a store will make every `Store.set()` call go through the condition first.

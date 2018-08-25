@@ -3,14 +3,15 @@ import { Store } from 'laco'
 // Creating a new store with an initial state { count: 0 }
 export const CounterStore = new Store({ count: 0 }, 'Counter')
 
-// Setting a condition to prevent count from going below 0
-// and a special case for `SudoDecrement` action which can make count go below 0
+// Setting a condition to prevent count from going below 0 when `actionType` is `Decrement`
 CounterStore.setCondition((state, actionType) => {
-  if (state.count >= 0) {
-    return state
-  } else if (actionType === 'SudoDecrement') {
-    return state
+  if (state.count < 0 && actionType === "Decrement") {
+    // Returning a falsy value will prevent the state from changing
+    return false;
   }
+
+  // For every other `actionTypes` such as `SudoDecrement` will change the state
+  return state;
 })
 
 // Implementing some actions to update the store
