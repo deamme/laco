@@ -45,10 +45,10 @@ export class Store {
 
   set(state: Function, info?: String) {
     if (this.condition) {
-      const newState = this.condition({ ...state(STORE[this.idx]), ...state }, info)
+      const newState = this.condition({ ...STORE[this.idx], ...state(STORE[this.idx]) }, info)
       if (newState) STORE[this.idx] = newState
     } else {
-      STORE[this.idx] = { ...state(STORE[this.idx]), ...state }
+      STORE[this.idx] = { ...STORE[this.idx], ...state(STORE[this.idx]) }
     }
 
     if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
