@@ -111,3 +111,15 @@ export function dispatch(value: any, info: string) {
   }
   return value
 }
+
+export function getGlobalState() {
+  return STORE
+}
+
+export function resetGlobalState() {
+  STORE = {}
+}
+
+export function replaceGlobalState(state: Object) {
+  STORE = state
+}
