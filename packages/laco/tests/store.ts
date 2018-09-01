@@ -1,5 +1,5 @@
 import * as test from 'tape'
-import { Store } from '../dist'
+import { Store, getGlobalState, resetGlobalState, replaceGlobalState } from '../dist'
 
 test('Correct store index', t => {
   const FirstStore = new Store({ test: true })
@@ -135,6 +135,17 @@ test('TestStore actions with condition', t => {
   decrement()
   t.assert(TestStore.get().count === 0)
   t.assert(TestStore.get().toggle === true)
+
+  t.end()
+})
+
+test('Global state', t => {
+  resetGlobalState()
+  t.assert(JSON.stringify(getGlobalState()) === JSON.stringify({}))
+  
+  const newGlobalState = { 0: { test: true }}
+  replaceGlobalState(newGlobalState)
+  t.assert(JSON.stringify(getGlobalState()) === JSON.stringify(getGlobalState()))
 
   t.end()
 })
