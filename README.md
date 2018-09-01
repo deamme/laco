@@ -133,6 +133,32 @@ dispatch(changeLocation(), "Location change")
 ```
 You might want to dispatch a global action that is **NOT** associated with any store. The action will in this case just be shown as `Location change`.
 
+### `getGlobalState()`
+```javascript
+import { getGlobalState } from 'laco'
+
+getGlobalState()
+```
+Returns the global object that holds every state - mostly used for [rehydration](https://github.com/deamme/laco#Rehydration) when doing server-side rendering (SSR).
+
+### `resetGlobalState()`
+```javascript
+import { resetGlobalState } from 'laco'
+
+resetGlobalState()
+```
+Resets the global state to an empty object.
+
+### `replaceGlobalState()`
+```javascript
+import { replaceGlobalState } from 'laco'
+
+const newGlobalState = { 0: { test: true } }
+
+replaceGlobalState(newGlobalState)
+```
+Replaces the global state completely - mostly used for [rehydration](https://github.com/deamme/laco#Rehydration) when doing server-side rendering (SSR).
+
 ### `<Subscribe />`
 #### Props
 - `to` - Array of stores you want to subscribe to
@@ -150,6 +176,16 @@ You might want to dispatch a global action that is **NOT** associated with any s
 The `Subscribe` component is making use of the new render prop idea. Related articles:
 - [Apollo Query Component](https://dev-blog.apollodata.com/whats-next-for-react-apollo-4d41ba12c2cb)
 - [Use a render prop!](https://cdb.reacttraining.com/use-a-render-prop-50de598f11ce)
+
+## Rehydration
+When doing server-side rendering (SSR) it's important to preserve the state from the server to the client.
+
+Please follow [this](https://redux.js.org/recipes/serverrendering) Redux guide.
+
+On the server: Instead of doing `store.getState()` you will just use `getGlobalState()`.
+
+On the client: Instead of doing `createStore(counterApp, preloadedState)` you can do `replaceGlobalState(preloadedState)`
+
 
 ## Testing
 Testing using [tape](https://github.com/substack/tape):
