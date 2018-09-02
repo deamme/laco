@@ -186,6 +186,9 @@ On the server: Instead of doing `store.getState()` you will just use `getGlobalS
 
 On the client: Instead of doing `createStore(counterApp, preloadedState)` you can do `replaceGlobalState(preloadedState)`
 
+Keep in mind that trying to do SSR rehydration can introduce JS injections if you don't do it right.
+
+The Redux guide solves it by doing `JSON.stringify(preloadedState).replace(/</g, '\\u003c')`. For another solution look [here](https://github.com/deamme/laco/pull/2#issuecomment-417880218).
 
 ## Testing
 Testing using [tape](https://github.com/substack/tape):
