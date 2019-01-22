@@ -1,4 +1,4 @@
-import { PureComponent } from 'react'
+import { PureComponent, useState, useEffect } from 'react'
 
 export class Subscribe extends PureComponent<any, any> {
   stores = []
@@ -36,4 +36,34 @@ export class Subscribe extends PureComponent<any, any> {
     this.stores = stores
     return (this.props as any).children(...states)
   }
+}
+
+export function useStore(store) {
+  const [state, setState] = useState(store.get())
+
+  function updateState() {
+    setState(store.get())
+  }
+
+  useEffect(() => {
+    store.subscribe(updateState)
+    return () => store.unsubscribe(updateState)
+  })
+
+  return state
+}
+
+export function useStores(stores: any[]) {
+  const [state, setState] = useState(stores.map(store => store.get()))
+
+  function updateState() {
+    setState(stores.map(store => store.get()))
+  }
+
+  useEffect(() => {
+    stores.map(store => store.subscribe(updateState))
+    return () => stores.map(store => store.unsubscribe(updateState))
+  })
+
+  return state
 }
