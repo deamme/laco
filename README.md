@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://i.imgur.com/jKG9XYF.png" width="80%">
+  <img src="https://i.imgur.com/7RgJ5nV.png" width="80%">
 </p>
 
 # Laco
@@ -8,6 +8,8 @@
 [![travis](https://travis-ci.org/deamme/laco.svg?branch=master)](https://travis-ci.org/deamme/laco)
 
 Very simple and powerful state management solution for React and Inferno.
+
+(Inferno doesn't have hooks support but you can use the [Subscribe component](https://github.com/deamme/laco#subscribe-).)
 
 Set up your stores and subscribe to them. Easy as that!
 
@@ -25,9 +27,9 @@ Set up your stores and subscribe to them. Easy as that!
 
 ## Example
 
-```javascript
+```jsx
 import { Store } from 'laco'
-import { Subscribe } from 'laco-react' // or 'laco-inferno'
+import { useStore } from 'laco-react'
 
 // Creating a new store with an initial state { count: 0 }
 const CounterStore = new Store({ count: 0 })
@@ -36,17 +38,16 @@ const CounterStore = new Store({ count: 0 })
 const increment = () => CounterStore.set(state => ({ count: state.count + 1 }))
 const decrement = () => CounterStore.set(state => ({ count: state.count - 1 }))
 
-const Counter = () => (
-  <Subscribe to={[CounterStore]}>
-    {state => (
-      <div>
-        <button onClick={decrement}>-</button>
-        <span>{state.count}</span>
-        <button onClick={increment}>+</button>
-      </div>
-    )}
-  </Subscribe>
-)
+const Counter = () => {
+  const state = useStore(CounterStore) // Takes a single store
+  return (
+    <div>
+      <button onClick={decrement}>-</button>
+      <span>{state.count}</span>
+      <button onClick={increment}>+</button>
+    </div>
+  )
+}
 ```
 
 For more examples check the following code sandboxes below or the examples folder.
@@ -205,7 +206,9 @@ Replaces the global state completely - mostly used for [rehydration](https://git
 
 - `to` - Array of stores you want to subscribe to
 
-```javascript
+```jsx
+import { Subscribe } from 'laco-react' // or 'laco-inferno'
+
 <Subscribe to={[CounterStore]}>
   {({ count }) => (
     <div>
@@ -216,11 +219,37 @@ Replaces the global state completely - mostly used for [rehydration](https://git
   )}
 </Subscribe>
 ```
-
 The `Subscribe` component is making use of the new render prop idea. Related articles:
-
 - [Apollo Query Component](https://dev-blog.apollodata.com/whats-next-for-react-apollo-4d41ba12c2cb)
 - [Use a render prop!](https://cdb.reacttraining.com/use-a-render-prop-50de598f11ce)
+
+### `useStore()`
+```jsx
+import { Store } from 'laco'
+import { useStore } from 'laco-react'
+
+const CounterStore = new Store({ count: 0 })
+
+const Counter = () => {
+  const state = useStore(CounterStore) // Takes a single store
+  return <div>{state.count}</div>
+}
+```
+
+### `useStores()`
+```jsx
+import { Store } from 'laco'
+import { useStores } from 'laco-react'
+
+const CounterStore = new Store({ count: 0 })
+const AnotherStore = new Store({ test: "hello" })
+
+const Counter = () => {
+                                    // Takes an array of stores
+  const [counterState, anotherState] = useStores([CounterStore, AnotherStore])
+  return <div>{anotherState.test + counterState.count}</div>
+}
+```
 
 ## Rehydration
 
