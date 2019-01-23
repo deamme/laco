@@ -52,10 +52,13 @@ const Counter = () => {
 
 For more examples check the following code sandboxes below or the examples folder.
 
-Code sandboxes:
+Code sandboxes using hooks:
+- [Todo MVC](https://codesandbox.io/s/74yq01ovl1)
+- [Counter and toggle](https://codesandbox.io/s/jvly033v63)
 
-- [TodoMVC](https://codesandbox.io/s/207504xx1y)
-- [Counter and Toggle](https://codesandbox.io/s/9rp990wky)
+Code sandboxes using render props:
+- [Todo MVC](https://codesandbox.io/s/207504xx1y)
+- [Counter and toggle](https://codesandbox.io/s/6l7on1m473)
 
 Following commands are available for each example project:
 
