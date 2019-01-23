@@ -4,7 +4,7 @@ if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
   console.log(`You're currently using a development version of Laco`)
   if ((window as any).__REDUX_DEVTOOLS_EXTENSION__) {
     devTools = (window as any).__REDUX_DEVTOOLS_EXTENSION__.connect()
-    devTools.init({})
+    setTimeout(() => devTools.init(STORE), 200)
   }
 }
 
@@ -25,7 +25,10 @@ export class Store {
     STORE[this.idx] = initialState
     this.initialState = initialState
 
-    if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
+    if (
+      typeof window !== 'undefined' &&
+      process.env.NODE_ENV !== 'production'
+    ) {
       if (devTools) {
         devTools.subscribe(message => {
           switch (message.payload && message.payload.type) {
@@ -45,13 +48,19 @@ export class Store {
 
   set(state: Function, info?: String) {
     if (this.condition) {
-      const newState = this.condition({ ...STORE[this.idx], ...state(STORE[this.idx]) }, info)
+      const newState = this.condition(
+        { ...STORE[this.idx], ...state(STORE[this.idx]) },
+        info
+      )
       if (newState) STORE[this.idx] = newState
     } else {
       STORE[this.idx] = { ...STORE[this.idx], ...state(STORE[this.idx]) }
     }
 
-    if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
+    if (
+      typeof window !== 'undefined' &&
+      process.env.NODE_ENV !== 'production'
+    ) {
       if (devTools) {
         devTools.send(this.name ? this.name + ' - ' + info : info, STORE)
       }
@@ -68,7 +77,10 @@ export class Store {
       STORE[this.idx] = state(STORE[this.idx])
     }
 
-    if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
+    if (
+      typeof window !== 'undefined' &&
+      process.env.NODE_ENV !== 'production'
+    ) {
       if (devTools) {
         devTools.send(this.name ? this.name + ' - ' + info : info, STORE)
       }
@@ -94,7 +106,10 @@ export class Store {
   }
 
   dispatch(value: any, info: string) {
-    if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
+    if (
+      typeof window !== 'undefined' &&
+      process.env.NODE_ENV !== 'production'
+    ) {
       if (devTools) {
         devTools.send(this.name ? this.name + ' - ' + info : info, STORE)
       }
