@@ -17,7 +17,7 @@ Set up your stores and subscribe to them. Easy as that!
 
 `npm install laco`
 
-`npm install laco-inferno` or `npm install laco-react`
+`npm install laco-react` or `npm install laco-inferno`
 
 ## Summary
 
@@ -60,17 +60,11 @@ Code sandboxes using render props:
 - [Todo MVC](https://codesandbox.io/s/207504xx1y)
 - [Counter and toggle](https://codesandbox.io/s/6l7on1m473)
 
-Following commands are available for each example project:
-
-`npm run start:dev`
-
-`npm run start:prod`
-
-`npm run test`
-
 ## Redux DevTools Extension
 
 Check out [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension).
+
+[Check out my post on dev.to about debugging etc.](https://dev.to/deamlabs/laco---debugging-actions-and-the-global-state-object-100a).
 
 ### Time travel
 
